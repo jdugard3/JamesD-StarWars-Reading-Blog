@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
 
 const PlanetCard = ({ planet, uid, url }) => {
   return (
@@ -16,9 +18,9 @@ const PlanetCard = ({ planet, uid, url }) => {
           />
           <div className="card-body">
             <h5 className="card-title">{planet}</h5>
-            <a href="#" className="btn btn-primary">
-              Planets
-            </a>
+            <Link to={`/planets/${uid}`}>
+              <button className="btn btn-primary">Planets</button>
+            </Link>
           </div>
         </div>
       </div>

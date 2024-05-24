@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
 
 const VehicleCard = ({ vehicle, uid, url }) => {
   return (
@@ -12,9 +14,10 @@ const VehicleCard = ({ vehicle, uid, url }) => {
           />
           <div className="card-body">
             <h5 className="card-title">{vehicle}</h5>
-            <a href="#" className="btn btn-primary">
-              Vehicles
-            </a>
+            <Link to={`/vehicle/${uid}`}>
+              <button className="btn btn-primary">Vehicles</button>
+            </Link>
+            
           </div>
         </div>
       </div>
