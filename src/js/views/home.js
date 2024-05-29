@@ -4,6 +4,8 @@ import "../../styles/home.css";
 
 export const Home = () => (
 	<>
+	<div className="bg-dark">
 		<StarWarsHome />
+	</div>
 	</>
 );

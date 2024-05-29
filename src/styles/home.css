@@ -1,0 +1,10 @@
+/* .person-details{
+    display: grid;
+    max-width: 60%;
+} */
+.person-img {
+    width: 30%;
+}
+body{
+    background-color: rgb(37, 37, 37);
+}

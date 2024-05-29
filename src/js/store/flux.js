@@ -52,6 +52,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         setStore({ people: data.results });
       },
       getPersonDetails: async (id) => {
+        setStore({ personDetails: null });
         const response = await fetch(`https://www.swapi.tech/api/people/${id}`);
         if (!response.ok) {
           throw new Error(response.status, response.statusText);
@@ -79,7 +80,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           throw new Error(response.status, response.statusText);
         }
         const data = await response.json();
-        
+
         const vehicleDetails = {
           description: data.result.description,
           properties: { ...data.result.properties },
@@ -109,8 +110,21 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
 
-      addFavorite: () => {},
-      removeFavorite: () => {},
+      addFavorite: (item) => {
+        console.log(item)
+        setStore({ favorites: [...getStore().favorites, item] })
+      },
+      removeFavorite: (item) => {
+        const store = getStore()
+        console.log("Before removing fav", store.favorites)
+        const newFavorites = store.favorites.filter((x) => x != item)
+        console.log("New favorites", newFavorites)
+        setStore({
+          favorites: newFavorites
+        })
+        console.log("After changing store favorites", store.favorites)
+
+      },
     },
   };
 };

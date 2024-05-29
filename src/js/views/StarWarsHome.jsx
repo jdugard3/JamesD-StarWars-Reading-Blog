@@ -10,14 +10,14 @@ const StarWarsHome = () => {
 
   return (
     <>
-      <div className="row mt-5">
+      <div className="row mt-5 bg-dark">
         <div className="col-2"></div>
-        <div className="col-8">
+        <div className="col-8 text-warning">
           <h1>Characters</h1>
         </div>
         <div className="col-2"></div>
       </div>
-      <div className="row mt-5">
+      <div className="row mt-5 bg-dark">
         <div className="col-2"></div>
         <div className="col-8 d-flex overflow-auto justify-content-evenly">
           {store.people.map((person) => {
@@ -33,14 +33,14 @@ const StarWarsHome = () => {
         </div>
         <div className="col-2"></div>
       </div>
-      <div className="row mt-5">
+      <div className="row mt-5 bg-dark">
         <div className="col-2"></div>
-        <div className="col-8">
+        <div className="col-8 text-warning">
           <h1>Vehicle</h1>
         </div>
         <div className="col-2"></div>
       </div>
-      <div className="row mt-5">
+      <div className="row mt-5 bg-dark">
         <div className="col-2"></div>
         <div className="col-8 d-flex overflow-auto">
           {store.vehicles.map((vehicle) => {
@@ -56,14 +56,14 @@ const StarWarsHome = () => {
         </div>
         <div className="col-2"></div>
       </div>
-      <div className="row mt-5">
+      <div className="row mt-5 bg-dark">
         <div className="col-2"></div>
-        <div className="col-8">
+        <div className="col-8 text-warning">
           <h1>Planets</h1>
         </div>
         <div className="col-2"></div>
       </div>
-      <div className="row mt-5">
+      <div className="row mt-5 bg-dark">
         <div className="col-2"></div>
         <div className="col-8 d-flex overflow-auto">
           {store.planets.map((planet) => {
