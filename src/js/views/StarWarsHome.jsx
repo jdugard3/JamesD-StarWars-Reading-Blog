@@ -30,6 +30,7 @@ const StarWarsHome = () => {
               />
             );
           })}
+          
         </div>
         <div className="col-2"></div>
       </div>
@@ -82,5 +83,12 @@ const StarWarsHome = () => {
     </>
   );
 };
+
+const Section = ({ title, children}) => (
+  <div className="mt-5">
+    <h1 className="text-center mb-4">{title}</h1>
+    <div className="d-flex overflow-auto justify-content-evenly custom-scrollbar">{children}</div>
+  </div>
+);
 
 export default StarWarsHome;
