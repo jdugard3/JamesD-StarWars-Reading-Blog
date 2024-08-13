@@ -1,61 +1,53 @@
 import React, { useContext, useEffect } from "react";
-import PropTypes from "prop-types";
 import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 
-const VehicleDetails = (props) => {
+const VehicleDetails = () => {
   const { store, actions } = useContext(Context);
   const { id } = useParams();
-  console.log(id)
+
   useEffect(() => {
     actions.getVehicleDetails(id);
-  }, []);
-  console.log(store.vehicleDetails.properties);
+  }, [id]);
+
+  const isLoading = !store.vehicleDetails && !store.vehicleDetailsError;
 
   return (
-    <div className="">
-      {store.vehicleDetails ?
-        <div className="container-fluid d-flex align-items-center justify-content-center">
-          {store.vehicleDetails && (
-            <>
-              <div className="card mb-3 bg-dark" style={{ width: "80%", height: "100%" }}>
-                <div className="row g-0">
-                  <div className="col-md-4">
-                    <img src={`https://starwars-visualguide.com/assets/img/vehicles/${id}.jpg`} className="img-fluid rounded-start" alt="..." />
-                  </div>
-                  <div className="col-md-8">
-                    <div className="card-body">
-                      <h3 className="card-title text-warning">{store.vehicleDetails.properties.name}</h3>
-                      <p className="card-text text-warning fs-4">Manufacturer: {store.vehicleDetails.properties.manufacturer}</p>
-                      <p className="card-text text-warning fs-4">Vehicle Class: {store.vehicleDetails.properties.vehicle_class}</p>
-                      <p className="card-text text-warning fs-4">Cost in Credits: {store.vehicleDetails.properties.cost_in_credits}</p>
-                      <p className="card-text text-warning fs-4">Vehicle Model: {store.vehicleDetails.properties.model}</p>
-                      <p className="card-text text-warning fs-4">Max Speed: {store.vehicleDetails.properties.max_atmosphering_speed}</p>
-                      <p className="card-text text-warning fs-4">Passengers: {store.vehicleDetails.properties.passengers}</p>
-                      <p className="card-text text-warning fs-4">Cargo Capacity: {store.vehicleDetails.properties.cargo_capacity}</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-
-            </>
-          )}
+    <div className="container my-5">
+      {isLoading ? (
+        <div className="d-flex justify-content-center">
+          <img src="https://media1.tenor.com/m/fc47Cmt6yn4AAAAC/star-wars-disney.gif" alt="Loading..." />
         </div>
-        : <img src="https://media1.tenor.com/m/fc47Cmt6yn4AAAAC/star-wars-disney.gif">
-        </img>}
-
-      <Link to="/">
-        <span className="btn btn-primary btn-lg" href="#" role="button">
-          Back home
-        </span>
-      </Link>
+      ) : store.vehicleDetails ? (
+        <div className="card bg-dark text-light p-4" style={{ borderRadius: "10px", boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)" }}>
+          <div className="row">
+            <div className="col-md-4">
+              <img
+                src={`https://starwars-visualguide.com/assets/img/vehicles/${id}.jpg`}
+                className="img-fluid rounded"
+                alt={store.vehicleDetails.properties.name}
+              />
+            </div>
+            <div className="col-md-8">
+              <h1 className="text-warning">{store.vehicleDetails.properties.name}</h1>
+              <p className="fs-4 text-warning">Manufacturer: {store.vehicleDetails.properties.manufacturer}</p>
+              <p className="fs-4 text-warning">Vehicle Class: {store.vehicleDetails.properties.vehicle_class}</p>
+              <p className="fs-4 text-warning">Cost in Credits: {store.vehicleDetails.properties.cost_in_credits}</p>
+              <p className="fs-4 text-warning">Vehicle Model: {store.vehicleDetails.properties.model}</p>
+              <p className="fs-4 text-warning">Max Speed: {store.vehicleDetails.properties.max_atmosphering_speed}</p>
+              <p className="fs-4 text-warning">Passengers: {store.vehicleDetails.properties.passengers}</p>
+              <p className="fs-4 text-warning">Cargo Capacity: {store.vehicleDetails.properties.cargo_capacity}</p>
+              <Link to="/">
+                <button className="btn btn-warning btn-lg mt-3">Back home</button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <img src="https://media1.tenor.com/m/fc47Cmt6yn4AAAAC/star-wars-disney.gif" alt="Loading..." />
+      )}
     </div>
   );
 };
 
 export default VehicleDetails;
-
-VehicleDetails.propTypes = {
-  match: PropTypes.object,
-};
