@@ -1,60 +1,56 @@
 import React, { useContext, useEffect } from "react";
-import PropTypes from "prop-types";
 import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 const PersonDetails = () => {
   const { store, actions } = useContext(Context);
   const { id } = useParams();
-  console.log(id)
+
+  // Fetch person details based on the id from URL parameters
   useEffect(() => {
     actions.getPersonDetails(id);
   }, []);
 
   return (
-    <div className="">
-      {store.personDetails ?
-        <div className="container-fluid d-flex align-items-center justify-content-center">
-          {store.personDetails && (
-            <>
-              <div className="mb-3 bg-dark" style={{ width: "80%" }}>
-                <div className="row g-0">
-                  <div className="col-md-4">
-                    <img src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`} className="img-fluid rounded-start" alt="..." />
-                  </div>
-                  <div className="col-md-8 bg-dark">
-                    <div className="card-body">
-                      <h1 className="card-title text-warning">{store.personDetails.properties.name}</h1>
-                      <p className="card-text text-warning fs-4">Birth Year: {store.personDetails.properties.birth_year}</p>
-                      <p className="card-text text-warning fs-4">Gender: {store.personDetails.properties.gender}</p>
-                      <p className="card-text text-warning fs-4">Height: {store.personDetails.properties.height}</p>
-                      <p className="card-text text-warning fs-4">Skin Color: {store.personDetails.properties.skin_color}</p>
-                      <p className="card-text text-warning fs-4">Hair Color: {store.personDetails.properties.hair_color}</p>
-                      <p className="card-text text-warning fs-4">Mass: {store.personDetails.properties.mass}</p>
-                      <p className="card-text text-warning fs-4">Eye Color: {store.personDetails.properties.eye_color}</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+    <div className="container my-5">
+      {store.personDetails ? (
+        // Updated card layout with a modern design, including rounded corners and shadow
+        <div className="card bg-dark text-light p-4" style={{ borderRadius: "10px", boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)" }}>
+          <div className="row">
 
+            {/* Display character image with a rounded style */}
+            <div className="col-md-4">
+              <img
+                src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`}
+                className="img-fluid rounded"
+                alt={store.personDetails.properties.name}
+              />
+            </div>
 
-            </>
-          )}
+            {/* Display character details in a two-column layout */}
+            <div className="col-md-8">
+              <h1 className="text-warning">{store.personDetails.properties.name}</h1>
+              <p className="fs-4">Birth Year: {store.personDetails.properties.birth_year}</p>
+              <p className="fs-4">Gender: {store.personDetails.properties.gender}</p>
+              <p className="fs-4">Height: {store.personDetails.properties.height}</p>
+              <p className="fs-4">Skin Color: {store.personDetails.properties.skin_color}</p>
+              <p className="fs-4">Hair Color: {store.personDetails.properties.hair_color}</p>
+              <p className="fs-4">Mass: {store.personDetails.properties.mass}</p>
+              <p className="fs-4">Eye Color: {store.personDetails.properties.eye_color}</p>
+
+              {/* Button to navigate back to the home page */}
+              <Link to="/">
+                <button className="btn btn-primary btn-lg mt-3">Back home</button>
+              </Link>
+            </div>
+          </div>
         </div>
-        : <img src="https://media1.tenor.com/m/fc47Cmt6yn4AAAAC/star-wars-disney.gif">
-        </img>}
-
-      <Link to="/">
-        <span className="btn btn-primary btn-lg" href="#" role="button">
-          Back home
-        </span>
-      </Link>
+      ) : (
+        // Display loading GIF while data is being fetched
+        <img src="https://media1.tenor.com/m/fc47Cmt6yn4AAAAC/star-wars-disney.gif" alt="Loading..." />
+      )}
     </div>
   );
 };
 
 export default PersonDetails;
-
-PersonDetails.propTypes = {
-  match: PropTypes.object,
-};

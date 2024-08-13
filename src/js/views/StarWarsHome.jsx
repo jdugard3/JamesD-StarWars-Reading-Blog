@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
-
 import PeopleCard from "../component/PeopleCard.jsx";
 import VehicleCard from "../component/VehiclesCard.jsx";
 import PlanetCard from "../component/PlanetsCard.jsx";
@@ -10,84 +9,57 @@ const StarWarsHome = () => {
 
   return (
     <>
-      <div className="row mt-5 bg-dark">
-        <div className="col-2"></div>
-        <div className="col-8 text-warning">
-          <h1>Characters</h1>
-        </div>
-        <div className="col-2"></div>
-      </div>
-      <div className="row mt-5 bg-dark">
-        <div className="col-2"></div>
-        <div className="col-8 d-flex overflow-auto justify-content-evenly">
-          {store.people.map((person) => {
-            return (
-              <PeopleCard
-                key={person.uid}
-                uid={person.uid}
-                name={person.name}
-                url={person.url}
-              />
-            );
-          })}
-          
-        </div>
-        <div className="col-2"></div>
-      </div>
-      <div className="row mt-5 bg-dark">
-        <div className="col-2"></div>
-        <div className="col-8 text-warning">
-          <h1>Vehicle</h1>
-        </div>
-        <div className="col-2"></div>
-      </div>
-      <div className="row mt-5 bg-dark">
-        <div className="col-2"></div>
-        <div className="col-8 d-flex overflow-auto">
-          {store.vehicles.map((vehicle) => {
-            return (
-              <VehicleCard
-                key={vehicle.uid}
-                uid={vehicle.uid}
-                url={vehicle.url}
-                vehicle={vehicle.name}
-              />
-            );
-          })}
-        </div>
-        <div className="col-2"></div>
-      </div>
-      <div className="row mt-5 bg-dark">
-        <div className="col-2"></div>
-        <div className="col-8 text-warning">
-          <h1>Planets</h1>
-        </div>
-        <div className="col-2"></div>
-      </div>
-      <div className="row mt-5 bg-dark">
-        <div className="col-2"></div>
-        <div className="col-8 d-flex overflow-auto">
-          {store.planets.map((planet) => {
-            return (
-              <PlanetCard
-                key={planet.uid}
-                uid={planet.uid}
-                url={planet.url}
-                planet={planet.name}
-              />
-            );
-          })}
-        </div>
-        <div className="col-2"></div>
+      {/* Updated container-fluid to have a gradient background for a modern look */}
+      <div className="container-fluid py-5" style={{ background: "linear-gradient(to right, #141e30, #243b55)" }}>
+
+        {/* Section component for Characters */}
+        <Section title="Characters">
+          {store.people.map((person) => (
+            <PeopleCard
+              key={person.uid}
+              uid={person.uid}
+              name={person.name}
+              url={person.url}
+            />
+          ))}
+        </Section>
+
+        {/* Section component for Vehicles */}
+        <Section title="Vehicles">
+          {store.vehicles.map((vehicle) => (
+            <VehicleCard
+              key={vehicle.uid}
+              uid={vehicle.uid}
+              url={vehicle.url}
+              vehicle={vehicle.name}
+            />
+          ))}
+        </Section>
+
+        {/* Section component for Planets */}
+        <Section title="Planets">
+          {store.planets.map((planet) => (
+            <PlanetCard
+              key={planet.uid}
+              uid={planet.uid}
+              url={planet.url}
+              planet={planet.name}
+            />
+          ))}
+        </Section>
       </div>
     </>
   );
 };
 
-const Section = ({ title, children}) => (
-  <div className="mt-5">
-    <h1 className="text-center mb-4">{title}</h1>
-    <div className="d-flex overflow-auto justify-content-evenly custom-scrollbar">{children}</div>
+// Section component to streamline the structure and apply consistent styling
+const Section = ({ title, children }) => (
+  <div className="mb-5">
+    {/* Styled section titles with a glowing effect and larger font size */}
+    <h1 className="text-center mb-4" style={{ color: "#f5c518", fontSize: "2.5rem", textShadow: "2px 2px 10px #f5c518" }}>{title}</h1>
+
+    {/* Adjusted the content to align left and added custom scrollbar styles */}
+    <div className="d-flex overflow-auto justify-content-start custom-scrollbar">{children}</div>
   </div>
 );
 
